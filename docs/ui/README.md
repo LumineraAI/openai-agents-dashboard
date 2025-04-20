@@ -4,15 +4,15 @@ This document provides a comprehensive overview of the OpenAI Agents UI frontend
 
 ## UI Architecture
 
-The OpenAI Agents UI is built using a modern frontend stack with React, TypeScript, and Shadcn/UI with Tailwind CSS. It follows a component-based architecture with Redux Toolkit for state management.
+The OpenAI Agents UI is built using a modern frontend stack with React, TypeScript, and Material-UI (MUI). It follows a component-based architecture with Redux Toolkit for state management.
 
 ### Technology Stack
 
 - **React**: A JavaScript library for building user interfaces
 - **TypeScript**: A typed superset of JavaScript
 - **Vite**: A build tool that provides faster and leaner development experience
-- **Shadcn/UI**: A collection of reusable UI components
-- **Tailwind CSS**: A utility-first CSS framework
+- **Material-UI (MUI)**: A comprehensive React UI component library
+- **Emotion**: A CSS-in-JS library used by MUI for styling
 - **Redux Toolkit**: A state management library
 - **React Router**: A routing library for React
 - **React Query**: A data fetching and caching library
@@ -50,9 +50,9 @@ agents-ui/
 ├── .env                     # Environment variables
 ├── index.html               # HTML template
 ├── package.json             # Dependencies and scripts
-├── tailwind.config.js       # Tailwind CSS configuration
+├── theme.ts                 # MUI theme configuration
 ├── tsconfig.json            # TypeScript configuration
-└── vite.config.ts           # Vite configuration
+└── # Vite configuration
 ```
 
 ### State Management
@@ -104,7 +104,8 @@ The UI follows these key design principles:
 ### 2. Responsive Design
 
 - The UI adapts to different screen sizes
-- Mobile-first approach with Tailwind CSS
+- Responsive components with MUI's Grid system
+- Breakpoint-based styling with MUI's useMediaQuery
 - Consistent user experience across devices
 
 ### 3. Accessibility
@@ -124,9 +125,9 @@ The UI follows these key design principles:
 ### 5. Consistent Design Language
 
 - Consistent use of colors, typography, and spacing
-- Reusable design tokens
-- Shadcn/UI components for consistent look and feel
-- Dark mode support
+- Centralized theme configuration
+- Material-UI components for consistent look and feel
+- Dark mode support with MUI's ThemeProvider with MUI's ThemeProvider
 
 ## Key Components
 
@@ -235,38 +236,48 @@ The Trace Viewer is a detailed interface for analyzing agent executions. It incl
 
 ## Theming and Styling
 
-The UI uses Tailwind CSS for styling with Shadcn/UI components. The theme is customizable with the following features:
+The UI uses Material-UI (MUI) for styling with Emotion CSS-in-JS. The theme is customizable through MUI's theming system through MUI's theming system with the following features:
 
 ### Color Scheme
 
-- Primary: Blue (#3B82F6)
-- Secondary: Gray (#6B7280)
-- Accent: Purple (#8B5CF6)
-- Success: Green (#10B981)
-- Warning: Yellow (#F59E0B)
-- Error: Red (#EF4444)
-- Background: White (#FFFFFF) / Dark (#111827)
-- Text: Black (#111827) / White (#F9FAFB)
+- Primary: Blue (#9c27b0)
+- Secondary: Purple (#9c27b0)
+- Success: Green (#2e7d32)
+- Warning: Amber (#ed6c02)
+- Error: Red (#d32f2f)
+- Info: Light Blue (#0288d1)
+- Info: Light Blue (#0288d1)
+- Background: White (#FFFFFF) / Dark (#1221212)
+- Text: Dark (#212121) / Light (#f5f5f5)
 
 ### Typography
 
-- Font Family: Inter
-- Base Size: 16px
-- Scale: 1.25 (Major Third)
-- Weights: 400 (Regular), 500 (Medium), 600 (SemiBold), 700 (Bold)
+- Font Family: Roboto
+- Base Size: 16px (1rem)
+- Variants: h1, h2, h3, h4, h5, h6, subtitle1, subtitle2, body1, body2, button, caption, overl (1rem)
+- Variants: h1, h2, h3, h4, h5, h6, subtitle1, subtitle2, body1, body2, button, caption, overline
+- Weights: 300 (Light), 300 (Light), 400 (Regular), 700 (Bold)
 
 ### Spacing
 
-- Base Unit: 4px
-- Scale: 0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128
+- Base Unit: 8px (1 = 8px)
+- Custom spacing can be applied using the theme.spacing() function
+- Common values: 1 (8px), 2 (16px), 3 (24px), 4 (32px), etc.
 
 ### Breakpoints
 
-- sm: 640px
-- md: 768px
-- lg: 1024px
-- xl: 1280px
-- 2xl: 1536px
+- xs: 0px
+- sm: 600px
+- md: 900Custom spacing can be applied using the theme.spacing() function
+- Common values: 1 (8px), 2 (16px), 3 (24px), 4 (32px), etc.
+
+### Breakpoints
+
+- xs: 0px
+- sm: 600px
+- md: 900px
+- gg: 1200px
+- l: 1536px
 
 ## Accessibility
 

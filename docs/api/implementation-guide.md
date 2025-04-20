@@ -92,8 +92,8 @@ agents-api/
 ├── .env                      # Environment variables
 ├── .env.example              # Example environment variables
 ├── pyproject.toml            # Project metadata and dependencies
-├── Dockerfile                # Docker configuration
-└── docker-compose.yml        # Docker Compose configuration
+├── Containerfile             # Podman container configuration
+└── podman-compose.yml        # Podman Compose configuration
 ```
 
 ## Database Schema
@@ -940,11 +940,11 @@ def test_create_agent(client, db: Session, test_user):
     db.commit()
 ```
 
-### 13. Implement Docker Configuration
+### 13. Implement Podman Configuration
 
-Create a Dockerfile for the API:
+Create a Containerfile for the API:
 
-```dockerfile
+```
 FROM python:3.9-slim
 
 WORKDIR /app
@@ -960,7 +960,7 @@ COPY . .
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-Create a docker-compose.yml file:
+Create a podman-compose.yml file:
 
 ```yaml
 version: '3'
@@ -988,17 +988,20 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=agents_ui
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data:Z
     ports:
       - "5432:5432"
   
   redis:
     image: redis:7
+    volumes:
+      - redis_data:/data:Z
     ports:
       - "6379:6379"
 
 volumes:
   postgres_data:
+  redis_data:
 ```
 
 ## Deployment
@@ -1008,7 +1011,7 @@ volumes:
 1. Start the database and Redis:
 
 ```bash
-docker-compose up -d db redis
+podman-compose up -d db redis
 ```
 
 2. Run database migrations:
@@ -1023,18 +1026,18 @@ alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
-### Docker Deployment
+### Podman Deployment
 
 1. Build and start all services:
 
 ```bash
-docker-compose up -d
+podman-compose up -d
 ```
 
 2. Run database migrations:
 
 ```bash
-docker-compose exec api alembic upgrade head
+podman exec -it openai-agents-ui_api_1 alembic upgrade head
 ```
 
 ### Production Deployment

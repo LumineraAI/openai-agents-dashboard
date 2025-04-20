@@ -1984,11 +1984,11 @@ describe('AgentCard', () => {
 
 ## Deployment
 
-### Docker Setup
+### Podman Setup
 
-Create a `Dockerfile` for the UI:
+Create a `Containerfile` for the UI:
 
-```dockerfile
+```
 FROM node:16-alpine as build
 
 WORKDIR /app

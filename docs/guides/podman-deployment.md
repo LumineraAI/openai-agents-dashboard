@@ -57,7 +57,7 @@ VITE_API_URL=https://api.your-domain.com
 
 Create a `Containerfile.prod` for the API in the `api` directory:
 
-```dockerfile
+```
 FROM python:3.9-slim
 
 WORKDIR /app
@@ -73,7 +73,7 @@ CMD ["gunicorn", "main:app", "--workers", "4", "--worker-class", "uvicorn.worker
 
 Create a `Containerfile.prod` for the frontend in the `agents-ui` directory:
 
-```dockerfile
+```
 # Build stage
 FROM node:16-alpine as build
 

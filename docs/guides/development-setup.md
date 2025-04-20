@@ -11,7 +11,7 @@ Before you begin, ensure you have the following installed:
 - **PostgreSQL** for the database
 - **Redis** for caching (optional)
 - **Git** for version control
-- **Docker** and Docker Compose (optional, for containerized development)
+- **Podman** and Podman Compose (optional, for containerized development)
 
 ## Repository Setup
 
@@ -237,7 +237,7 @@ volumes:
 
 2. Create a `Containerfile.dev` for the API in the `api` directory:
 
-```dockerfile
+```
 FROM python:3.9-slim
 
 WORKDIR /app
@@ -250,7 +250,7 @@ CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
 
 3. Create a `Containerfile.dev` for the frontend in the `agents-ui` directory:
 
-```dockerfile
+```
 FROM node:16-alpine
 
 WORKDIR /app
